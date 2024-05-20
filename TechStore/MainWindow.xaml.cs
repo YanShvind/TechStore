@@ -26,10 +26,37 @@ namespace TechStore
             InitializeComponent();
             DbContextTech.entity = new technicalstoreEntities();
             ListView1.ItemsSource = DbContextTech.entity.goods.ToList();
-            SortBy.ItemsSource = new string[] { "name", "price" };
-            sortProp.ItemsSource = Enum.GetNames(typeof(ListSortDirection));
+            SortBy.ItemsSource = new string[] { "Название", "цена" };
+            var enumDirection = new string[] { "по возрастанию", "по убыванию" };
+
+            
+            //asdasdasdasdasdasdasdasdasdasdasdasdasd
+
+
+            sortProp.ItemsSource = enumDirection;
+            sortProp.SelectedValue = enumDirection[0];
+            SortBy.SelectedValue = "Название";
             ListView1.Items.SortDescriptions.Add(new SortDescription("name", ListSortDirection.Ascending));
 
+            sortProp.SelectionChanged += SelectionChanged;
+            SortBy.SelectionChanged += SelectionChanged;
+        }
+
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedFilter = sortProp.SelectedItem.ToString();
+            string selectedSort = SortBy.SelectedItem.ToString();
+            ListSortDirection sortDirection = selectedFilter.Contains("по возрастанию") ? ListSortDirection.Ascending : ListSortDirection.Descending;
+
+            var view = (CollectionView)CollectionViewSource.GetDefaultView(ListView1.ItemsSource);
+            view.SortDescriptions.Clear();
+
+            if (selectedSort == "Название")
+                selectedSort = "name";
+            if (selectedSort == "цена")
+                selectedSort = "price";
+
+            view.SortDescriptions.Add(new SortDescription(selectedSort, sortDirection));
         }
     }
 }
