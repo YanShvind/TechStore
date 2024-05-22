@@ -24,39 +24,48 @@ namespace TechStore
         public MainWindow()
         {
             InitializeComponent();
-            DbContextTech.entity = new technicalstoreEntities();
-            ListView1.ItemsSource = DbContextTech.entity.goods.ToList();
-            SortBy.ItemsSource = new string[] { "Название", "цена" };
-            var enumDirection = new string[] { "по возрастанию", "по убыванию" };
-
-            
-            //asdasdasdasdasdasdasdasdasdasdasdasdasd
-
-
-            sortProp.ItemsSource = enumDirection;
-            sortProp.SelectedValue = enumDirection[0];
-            SortBy.SelectedValue = "Название";
-            ListView1.Items.SortDescriptions.Add(new SortDescription("name", ListSortDirection.Ascending));
-
-            sortProp.SelectionChanged += SelectionChanged;
-            SortBy.SelectionChanged += SelectionChanged;
         }
 
-        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string selectedFilter = sortProp.SelectedItem.ToString();
-            string selectedSort = SortBy.SelectedItem.ToString();
-            ListSortDirection sortDirection = selectedFilter.Contains("по возрастанию") ? ListSortDirection.Ascending : ListSortDirection.Descending;
+            Registration registration = new Registration();
+            registration.Show();
+            this.Close();
+        }
 
-            var view = (CollectionView)CollectionViewSource.GetDefaultView(ListView1.ItemsSource);
-            view.SortDescriptions.Clear();
+        private void ButtonEnter_Click(object sender, RoutedEventArgs e)
+        {
+            string login = LoginTextBox.Text;
+            string password = PasswordTextBox.Password;
 
-            if (selectedSort == "Название")
-                selectedSort = "name";
-            if (selectedSort == "цена")
-                selectedSort = "price";
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Пожалуйста, заполните все поля.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-            view.SortDescriptions.Add(new SortDescription(selectedSort, sortDirection));
+            try
+            {
+                using (var context = new technicalstoreEntities())
+                {
+                    var user = context.users.FirstOrDefault(u => u.login == login && u.password == password);
+
+                    if (user != null)
+                    {
+                        Catalog catalog = new Catalog();
+                        catalog.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Неверный логин или пароль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при входе: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

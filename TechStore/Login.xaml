@@ -1,17 +1,18 @@
-﻿<Window x:Class="TechStore.MainWindow"
+﻿<Window x:Class="TechStore.Login"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TechStore"
         mc:Ignorable="d"
-        Title="TechStore" Height="470" Width="800">
+        Title="Login" Height="450" Width="800">
     <Grid>
         <Label Content="Логин" HorizontalAlignment="Left" Margin="69,81,0,0" VerticalAlignment="Top" />
         <Label Content="Пароль" HorizontalAlignment="Left" Margin="65,148,0,0" VerticalAlignment="Top" />
-        <Button Content="Войти" HorizontalAlignment="Left" Margin="350,87,0,0" VerticalAlignment="Top" Height="87" Width="240" Click="ButtonEnter_Click"/>
+        <Button Content="Войти" HorizontalAlignment="Left" Margin="350,87,0,0" VerticalAlignment="Top" Height="87" Width="240"/>
         <Button Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="69,197,0,0" VerticalAlignment="Top" Height="35" Width="521" Click="Button_Click"/>
-        <TextBox Name="LoginTextBox" HorizontalAlignment="Left" Margin="121,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Height="20"/>
-        <PasswordBox Name="PasswordTextBox" HorizontalAlignment="Left" Margin="121,153,0,0" VerticalAlignment="Top" Width="205" Height="21"/>
+        <TextBox HorizontalAlignment="Left" Margin="121,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Height="21" />
+        <TextBox HorizontalAlignment="Left" Margin="118,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Height="20"/>
+
     </Grid>
 </Window>
