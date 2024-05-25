@@ -36,6 +36,28 @@ namespace TechStore
             sortProp.SelectionChanged += SelectionChanged;
             SortBy.SelectionChanged += SelectionChanged;
         }
+        //
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            var selectedProduct = ListView1.SelectedItem as goods;
+
+            var cartItem = new basket()
+            {
+                idbasket = DatabaseFlower.authUserId,
+                idgood = selectedProduct.idgood,
+                quantity = 1,
+                
+            };
+
+  
+
+            DatabaseFlower.entity.basket.Add(cartItem);
+            DatabaseFlower.entity.SaveChanges();
+
+            }
+//
+        
 
         private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
