@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище technicalstoreModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="basket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idgood" Type="int" />
+          <Property Name="idbasket" Type="int" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="idcategory" />
+          </Key>
+          <Property Name="idcategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="goods">
+          <Key>
+            <PropertyRef Name="idgood" />
+          </Key>
+          <Property Name="idgood" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="250" />
+          <Property Name="description" Type="nvarchar" MaxLength="250" />
+          <Property Name="price" Type="int" />
+          <Property Name="image" Type="nvarchar" MaxLength="250" />
+          <Property Name="idcategory" Type="int" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="idorder" />
+          </Key>
+          <Property Name="idorder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idbasket" Type="int" />
+          <Property Name="iduser" Type="int" />
+          <Property Name="orderdate" Type="date" />
+          <Property Name="orderstatus" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="iduser" />
+          </Key>
+          <Property Name="iduser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staff" Type="int" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="phonenumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_basket_goods">
+          <End Role="goods" Type="Self.goods" Multiplicity="0..1" />
+          <End Role="basket" Type="Self.basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="idgood" />
+            </Principal>
+            <Dependent Role="basket">
+              <PropertyRef Name="idgood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_goods_category1">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="idcategory" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="idcategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_basket">
+          <End Role="basket" Type="Self.basket" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="basket">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="idbasket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="iduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище technicalstoreModelContainer">
+          <EntitySet Name="basket" EntityType="Self.basket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="goods" EntityType="Self.goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_basket_goods" Association="Self.FK_basket_goods">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="basket" EntitySet="basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_goods_category1" Association="Self.FK_goods_category1">
+            <End Role="category" EntitySet="category" />
+            <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_basket" Association="Self.FK_orders_basket">
+            <End Role="basket" EntitySet="basket" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_users" Association="Self.FK_orders_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="technicalstoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="basket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idgood" Type="Int32" />
+          <Property Name="idbasket" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="goods" Relationship="Self.FK_basket_goods" FromRole="basket" ToRole="goods" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_basket" FromRole="basket" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="idcategory" />
+          </Key>
+          <Property Name="idcategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="goods" Relationship="Self.FK_goods_category1" FromRole="category" ToRole="goods" />
+        </EntityType>
+        <EntityType Name="goods">
+          <Key>
+            <PropertyRef Name="idgood" />
+          </Key>
+          <Property Name="idgood" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="idcategory" Type="Int32" />
+          <NavigationProperty Name="basket" Relationship="Self.FK_basket_goods" FromRole="goods" ToRole="basket" />
+          <NavigationProperty Name="category" Relationship="Self.FK_goods_category1" FromRole="goods" ToRole="category" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="idorder" />
+          </Key>
+          <Property Name="idorder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idbasket" Type="Int32" />
+          <Property Name="iduser" Type="Int32" />
+          <Property Name="orderdate" Type="DateTime" Precision="0" />
+          <Property Name="orderstatus" Type="Int32" />
+          <NavigationProperty Name="basket" Relationship="Self.FK_orders_basket" FromRole="orders" ToRole="basket" />
+          <NavigationProperty Name="users" Relationship="Self.FK_orders_users" FromRole="orders" ToRole="users" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="iduser" />
+          </Key>
+          <Property Name="iduser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staff" Type="Int32" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phonenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_users" FromRole="users" ToRole="orders" />
+        </EntityType>
+        <Association Name="FK_basket_goods">
+          <End Role="goods" Type="Self.goods" Multiplicity="0..1" />
+          <End Role="basket" Type="Self.basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods">
+              <PropertyRef Name="idgood" />
+            </Principal>
+            <Dependent Role="basket">
+              <PropertyRef Name="idgood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_basket">
+          <End Role="basket" Type="Self.basket" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="basket">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="idbasket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_goods_category1">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="idcategory" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="idcategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="iduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="technicalstoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="basket" EntityType="Self.basket" />
+          <EntitySet Name="category" EntityType="Self.category" />
+          <EntitySet Name="goods" EntityType="Self.goods" />
+          <EntitySet Name="orders" EntityType="Self.orders" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="FK_basket_goods" Association="Self.FK_basket_goods">
+            <End Role="goods" EntitySet="goods" />
+            <End Role="basket" EntitySet="basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_basket" Association="Self.FK_orders_basket">
+            <End Role="basket" EntitySet="basket" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_goods_category1" Association="Self.FK_goods_category1">
+            <End Role="category" EntitySet="category" />
+            <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_users" Association="Self.FK_orders_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище technicalstoreModelContainer" CdmEntityContainer="technicalstoreEntities">
+          <EntitySetMapping Name="basket">
+            <EntityTypeMapping TypeName="technicalstoreModel.basket">
+              <MappingFragment StoreEntitySet="basket">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idgood" ColumnName="idgood" />
+                <ScalarProperty Name="idbasket" ColumnName="idbasket" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="category">
+            <EntityTypeMapping TypeName="technicalstoreModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="idcategory" ColumnName="idcategory" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="goods">
+            <EntityTypeMapping TypeName="technicalstoreModel.goods">
+              <MappingFragment StoreEntitySet="goods">
+                <ScalarProperty Name="idgood" ColumnName="idgood" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="idcategory" ColumnName="idcategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="technicalstoreModel.orders">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="idorder" ColumnName="idorder" />
+                <ScalarProperty Name="idbasket" ColumnName="idbasket" />
+                <ScalarProperty Name="iduser" ColumnName="iduser" />
+                <ScalarProperty Name="orderdate" ColumnName="orderdate" />
+                <ScalarProperty Name="orderstatus" ColumnName="orderstatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="technicalstoreModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="technicalstoreModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="iduser" ColumnName="iduser" />
+                <ScalarProperty Name="staff" ColumnName="staff" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
