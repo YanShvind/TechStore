@@ -31,5 +31,20 @@ namespace TechStore
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<basket> basket { get; set; }
         public virtual category category { get; set; }
+
+        public string CorrectImage
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(image) || String.IsNullOrWhiteSpace(image))
+                {
+                    return "../Images/picture.png";
+                }
+                else
+                {
+                    return $"../Images/{image}";
+                }
+            }
+        }
     }
 }
