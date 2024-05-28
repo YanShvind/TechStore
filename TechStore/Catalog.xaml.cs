@@ -82,6 +82,7 @@ namespace TechStore
                     idgood = data.idgood,
                     quantity = 1,
                 };
+                //test12
                 DbContextTech.entity.basket.Add(cartItem);
                 DbContextTech.entity.SaveChanges();
             }
