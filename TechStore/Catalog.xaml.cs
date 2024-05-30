@@ -36,6 +36,9 @@ namespace TechStore
             sortProp.SelectionChanged += SelectionChanged;
             SortBy.SelectionChanged += SelectionChanged;
         }
+        //
+
+        
 
         private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
