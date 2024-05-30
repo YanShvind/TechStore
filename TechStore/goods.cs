@@ -38,11 +38,11 @@ namespace TechStore
             {
                 if (String.IsNullOrEmpty(image) || String.IsNullOrWhiteSpace(image))
                 {
-                    return "../Images/picture.png";
+                    return "/Images1/picture.png";
                 }
                 else
                 {
-                    return $"../Images/{image}";
+                    return "/Images1/" + image;
                 }
             }
         }

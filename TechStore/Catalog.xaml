@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TechStore"
         mc:Ignorable="d"
-        Title="Catalog" Height="450" Width="800">
+        Title="Catalog"
+        Width="800" 
+        Height="470" 
+        ResizeMode="NoResize">
     <Grid>
-        <Grid HorizontalAlignment="Center" Width="800" Height="55" VerticalAlignment="Top" Margin="0,379,0,0">
+        <Grid HorizontalAlignment="Center" Width="800" Height="57" VerticalAlignment="Top" Margin="0,367,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="3*"/>
@@ -18,7 +21,7 @@
             <ComboBox x:Name="SortBy" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="120"/>
             <Label Content="Сортировка" HorizontalAlignment="Left" Margin="32,2,0,0" VerticalAlignment="Top"/>
             <Label Grid.Column="2" Content="Поиск" HorizontalAlignment="Center" VerticalAlignment="Top" Width="78"/>
-            <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="....." VerticalAlignment="Top" Width="139" Height="22" Margin="0,28,0,0"/>
+            <TextBox Grid.Column="2" x:Name="SearchTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" Height="22" Margin="0,28,0,0" TextChanged="SearchTextBox_TextChanged"/>
             <Button Grid.Column="4" Content="Корзина" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.517,-0.042" Height="45" Width="112" Click="Button_Click"/>
             <ComboBox x:Name="sortProp" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,28,0,0"/>
             <Label Grid.Column="1" Content="Фильтры" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -28,7 +31,7 @@
                 <ColumnDefinition Width="19*"/>
                 <ColumnDefinition Width="81*"/>
             </Grid.ColumnDefinitions>
-            <ListView x:Name="ListView1" Margin="0,0,0,75" Grid.ColumnSpan="2">
+            <ListView x:Name="ListView1" Grid.ColumnSpan="2" Margin="0,0,0,10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -65,8 +68,6 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListView>
-
-
         </Grid>
     </Grid>
 </Window>

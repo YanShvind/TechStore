@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TechStore"
         mc:Ignorable="d"
-        Title="Basket" Height="450" Width="800">
+        Title="Basket" Height="450" Width="820" ResizeMode="NoResize">
     <Grid Margin="0,60,0,0">
 
         <ListView x:Name="ListView2">
@@ -17,35 +17,42 @@
                             <ColumnDefinition Width="400"/>
                             <ColumnDefinition Width="300"/>
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
                         <Image Grid.Column="0" Source="{Binding goods.CorrectImage}"/>
 
-                        <TextBlock Grid.Column="1" Margin="0,0,0,107">
-                                
-                                <Run Text="{Binding goods.name}"></Run>
-
+                        <TextBlock Grid.Column="1" Margin="0,0,0,107" Grid.RowSpan="3">
+                            <Run Text="{Binding goods.name}"></Run>
                         </TextBlock>
 
-                        <TextBlock Grid.Column="1" Margin="0,38,0,0">
-                                <Run Text="{Binding goods.description}" Cursor="AppStarting"></Run>
+                        <TextBlock Grid.Column="1" Margin="0,38,0,0" Grid.RowSpan="3">
+                            <Run Text="{Binding goods.description}" Cursor="AppStarting"></Run>
                         </TextBlock>
 
-                        <TextBlock Grid.Column="2" Margin="10,10,-10,-10">
-                                <Run Text="Цена"></Run>
-                                <Run Text="{Binding goods.price}"></Run>
-                                <Run Text="Р. за штуку"></Run>
+                        <TextBlock Grid.Column="2" Margin="10,10,-10,-10" Grid.Row="0">
+                            <Run Text="Цена"></Run>
+                            <Run Text="{Binding goods.price}"></Run>
+                            <Run Text=" Р. за штуку"></Run>
                         </TextBlock>
-                        <TextBlock Grid.Column="2" Margin="10,38,150,-38">
-                            <Run Text="Количество"></Run>
-                            <Run Text="{Binding quantity}"></Run>
-                        </TextBlock>
-                        <Button Grid.Column="2" Content="Удалить из корзины" Margin="10,64,115,26" Click="Button_Click"/>
+
+                        <StackPanel Grid.Column="2" Margin="10,0,10,0" Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1">
+                            <Button Content="-" Width="20" Height="20" Margin="5,0" Click="DecreaseQuantity_Click"/>
+                            <TextBlock VerticalAlignment="Center" Margin="5,0">
+                                <Run Text="{Binding quantity}"/>
+                            </TextBlock>
+                            <Button Content="+" Width="20" Height="20" Margin="5,0" Click="IncreaseQuantity_Click"/>
+                        </StackPanel>
+
+                        <Button Grid.Column="2" Content="Удалить из корзины" Margin="10,10,115,26" Grid.Row="2" Click="Button_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListView>
         <Button Content="Сделать заказ" HorizontalAlignment="Left" Margin="685,-53,0,0" VerticalAlignment="Top" Height="42" Width="104" Click="Button_Click_2"/>
         <Button Content="Назад в магазин" HorizontalAlignment="Left" Margin="14,-53,0,0" VerticalAlignment="Top" Height="42" Width="145" Click="Button_Click_1"/>
-
-
     </Grid>
 </Window>

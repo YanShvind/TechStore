@@ -36,9 +36,6 @@ namespace TechStore
             sortProp.SelectionChanged += SelectionChanged;
             SortBy.SelectionChanged += SelectionChanged;
         }
-        //
-
-        
 
         private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -89,6 +86,15 @@ namespace TechStore
                 DbContextTech.entity.basket.Add(cartItem);
                 DbContextTech.entity.SaveChanges();
             }
+        }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.ToLower();
+
+            var filteredList = DbContextTech.entity.goods.Where(g => g.name.ToLower().Contains(searchText) || g.description.ToLower().Contains(searchText)).ToList();
+
+            ListView1.ItemsSource = filteredList;
         }
     }
 }

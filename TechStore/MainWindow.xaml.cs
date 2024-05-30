@@ -24,6 +24,7 @@ namespace TechStore
         public MainWindow()
         {
             InitializeComponent();
+
             DbContextTech.entity = new technicalstoreEntities();
         }
 
