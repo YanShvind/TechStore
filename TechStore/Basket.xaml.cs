@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using QRCoder;
 
 namespace TechStore
 {
@@ -32,40 +33,53 @@ namespace TechStore
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Document doc = new Document();
-            string filePath = "C:\\Users\\10210815\\Source\\Repos\\YanShvind\\TechStore\\TechStore\\pdf\\check.pdf";
-
-            try
+            if (DbContextTech.entity.basket.Any())
             {
-                PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
-                doc.Open();
+                Document doc = new Document();
+                string filePath = "C:\\Users\\10210815\\Source\\Repos\\YanShvind\\TechStore\\TechStore\\pdf\\check.pdf";
 
-                iTextSharp.text.Paragraph title = new iTextSharp.text.Paragraph("Чек покупки");
-                title.Alignment = Element.ALIGN_CENTER;
-                doc.Add(title);
-                doc.Add(new iTextSharp.text.Paragraph("\n"));
-
-
-                List<basket> basketItems = DbContextTech.entity.basket.ToList();
-
-                foreach (var item in basketItems)
+                try
                 {
-                    goods product = DbContextTech.entity.goods.FirstOrDefault(g => g.idgood == item.idgood);
-                    if (product != null)
+                    PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+                    doc.Open();
+
+                    iTextSharp.text.Paragraph title = new iTextSharp.text.Paragraph("Чек покупки");
+                    title.Alignment = Element.ALIGN_CENTER;
+                    doc.Add(title);
+                    doc.Add(new iTextSharp.text.Paragraph("\n"));
+
+                    List<basket> basketItems = DbContextTech.entity.basket.ToList();
+
+                    decimal totalAmount = 0; 
+
+                    foreach (var item in basketItems)
                     {
-                        string itemInfo = $"{product.name} - {item.quantity} шт. x {product.price} руб.";
-                        doc.Add(new iTextSharp.text.Paragraph(itemInfo));
+                        goods product = DbContextTech.entity.goods.FirstOrDefault(g => g.idgood == item.idgood);
+                        if (product != null)
+                        {
+                            string itemInfo = $"{product.name} - {item.quantity} шт. x {product.price} руб.";
+                            doc.Add(new iTextSharp.text.Paragraph(itemInfo));
 
+                            totalAmount += (decimal)(item.quantity.GetValueOrDefault() * product.price);
+                        }
                     }
+
+                    iTextSharp.text.Paragraph totalAmountParagraph = new iTextSharp.text.Paragraph($"Итог: {totalAmount} руб.");
+                    totalAmountParagraph.Alignment = Element.ALIGN_RIGHT;
+                    doc.Add(totalAmountParagraph);
+
+                    doc.Close();
+
+                    System.Diagnostics.Process.Start(filePath);
                 }
-
-                doc.Close();
-
-                System.Diagnostics.Process.Start(filePath);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка при создании PDF: " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Ошибка при создании PDF: " + ex.Message);
+                MessageBox.Show("Корзина пуста. Невозможно создать чек.");
             }
         }
 
@@ -95,6 +109,7 @@ namespace TechStore
                 ListView2.ItemsSource = DbContextTech.entity.basket.ToList();
             }
         }
+
         private void DecreaseQuantity_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -116,7 +131,6 @@ namespace TechStore
             }
         }
 
-
         private void IncreaseQuantity_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -132,5 +146,41 @@ namespace TechStore
                 ListView2.ItemsSource = DbContextTech.entity.basket.ToList();
             }
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            if (DbContextTech.entity.basket.Any())
+            {
+                StringBuilder basketDataBuilder = new StringBuilder();
+                foreach (var item in DbContextTech.entity.basket)
+                {
+                    goods product = DbContextTech.entity.goods.FirstOrDefault(g => g.idgood == item.idgood);
+                    if (product != null)
+                    {
+                        string itemInfo = $"{product.name} - {item.quantity}шт x {product.price}руб.";
+                        basketDataBuilder.AppendLine(itemInfo);
+                    }
+                }
+                string basketData = basketDataBuilder.ToString();
+
+                QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(basketData, QRCodeGenerator.ECCLevel.Q);
+
+                QRCode qrCode = new QRCode(qrCodeData);
+                System.Drawing.Bitmap qrCodeImage = qrCode.GetGraphic(20); // 20 - размер пикселей
+
+                //System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "..", ".."), $"Images1"))
+
+                string qrCodeImagePath = "путь_до_изображения_qr_code.png";
+                qrCodeImage.Save(qrCodeImagePath);
+
+                System.Diagnostics.Process.Start(qrCodeImagePath);
+            }
+            else
+            {
+                MessageBox.Show("Корзина пуста. Невозможно создать QR-код.");
+            }
+        }
+
     }
 }

@@ -55,6 +55,9 @@ namespace TechStore
                     if (user != null)
                     {
                         var userDb = DbContextTech.entity.users.FirstOrDefault(x => x.login == login && x.password == password);
+
+                        DbContextTech.staff = userDb.staff;
+
                         Catalog catalog = new Catalog();
                         catalog.Show();
                         this.Close();
@@ -69,6 +72,11 @@ namespace TechStore
             {
                 MessageBox.Show($"Ошибка при входе: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void LoginTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

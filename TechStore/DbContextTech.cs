@@ -11,5 +11,8 @@ namespace TechStore
         public static technicalstoreEntities entity;
 
         public static int authUserId;
+        public static int? staff;
+        public static string ImageToAdd;
+
     }
 }

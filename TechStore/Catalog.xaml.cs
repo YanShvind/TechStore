@@ -25,6 +25,9 @@ namespace TechStore
             InitializeComponent();
             DbContextTech.entity = new technicalstoreEntities();
             ListView1.ItemsSource = DbContextTech.entity.goods.ToList();
+            if (DbContextTech.staff == 1)
+                AdminButton.Visibility = Visibility.Visible;
+
             SortBy.ItemsSource = new string[] { "Название", "цена" };
             var enumDirection = new string[] { "по возрастанию", "по убыванию" };
 
@@ -95,6 +98,37 @@ namespace TechStore
             var filteredList = DbContextTech.entity.goods.Where(g => g.name.ToLower().Contains(searchText) || g.description.ToLower().Contains(searchText)).ToList();
 
             ListView1.ItemsSource = filteredList;
+        }
+
+        private void Button_ClickAdd(object sender, RoutedEventArgs e)
+        {
+            AddElement add = new AddElement();
+            add.Show();
+            this.Close();
+        }
+
+        private void Button_ClickDel(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            var item = button.DataContext as goods;
+
+            if (item != null)
+            {
+
+                DbContextTech.entity.goods.Remove(item);
+
+
+                DbContextTech.entity.SaveChanges();
+
+
+                ListView1.ItemsSource = DbContextTech.entity.goods.ToList();
+            }
+        }
+
+        private void ListView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

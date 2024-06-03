@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TechStore"
         mc:Ignorable="d"
+        Icon="C:\Users\10210815\Source\Repos\YanShvind\TechStore\TechStore\Images1\logo1.png"
         Title="Basket" Height="450" Width="820" ResizeMode="NoResize">
     <Grid Margin="0,60,0,0">
 
@@ -52,6 +53,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListView>
+        <Button Content="QR" HorizontalAlignment="Left" Margin="637,-53,0,0" VerticalAlignment="Top" Height="42" Width="43" Click="Button_Click_3"/>
         <Button Content="Сделать заказ" HorizontalAlignment="Left" Margin="685,-53,0,0" VerticalAlignment="Top" Height="42" Width="104" Click="Button_Click_2"/>
         <Button Content="Назад в магазин" HorizontalAlignment="Left" Margin="14,-53,0,0" VerticalAlignment="Top" Height="42" Width="145" Click="Button_Click_1"/>
     </Grid>

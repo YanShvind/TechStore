@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TechStore"
         mc:Ignorable="d"
+        Icon="C:\Users\10210815\Source\Repos\YanShvind\TechStore\TechStore\Images1\logo1.png"
         Title="Registration" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <Label Content="Логин" HorizontalAlignment="Left" Margin="220,30,0,0" VerticalAlignment="Top" Height="28" Width="120" />
@@ -12,17 +13,17 @@
         <Label Content="Подтвердить пароль" HorizontalAlignment="Left" Margin="220,138,0,0" VerticalAlignment="Top" Height="28" Width="171"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="220,192,0,0" VerticalAlignment="Top" Height="28" Width="120" />
         <Label Content="Номер телефона" HorizontalAlignment="Left" Margin="220,248,0,0" VerticalAlignment="Top" Height="28" Width="155" />
-        <TextBox x:Name="LoginBox" HorizontalAlignment="Left" Margin="220,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" />
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="220,117,0,0" VerticalAlignment="Top" Width="196" />
-        <PasswordBox x:Name="ConfirmPasswordBox" HorizontalAlignment="Left" Margin="220,169,0,0" VerticalAlignment="Top" Width="196" />
-        <TextBox x:Name="EmailBox" HorizontalAlignment="Left" Margin="220,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" />
-        <TextBox x:Name="PhoneBox" HorizontalAlignment="Left" Margin="220,275,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" />
+        <TextBox x:Name="LoginBox" HorizontalAlignment="Left" Margin="220,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" MaxHeight="20"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="220,117,0,0" VerticalAlignment="Top" Width="196" MaxHeight="20"/>
+        <PasswordBox x:Name="ConfirmPasswordBox" HorizontalAlignment="Left" Margin="220,169,0,0" VerticalAlignment="Top" Width="196" MaxHeight="20"/>
+        <TextBox x:Name="EmailBox" HorizontalAlignment="Left" Margin="220,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" MaxHeight="20"/>
+        <TextBox x:Name="PhoneBox" HorizontalAlignment="Left" Margin="220,275,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" MaxHeight="20"/>
 
         <Label Content="Имя" HorizontalAlignment="Left" Margin="473,30,0,0" VerticalAlignment="Top" Height="28" Width="120" />
         <Label Content="Фамилия" HorizontalAlignment="Left" Margin="473,84,0,0" VerticalAlignment="Top" Height="28" Width="171" />
 
-        <TextBox x:Name="NameBox" HorizontalAlignment="Left" Margin="473,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" />
-        <TextBox x:Name="SurnameBox" HorizontalAlignment="Left" Margin="473,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" />
+        <TextBox x:Name="NameBox" HorizontalAlignment="Left" Margin="473,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" MaxHeight="20"/>
+        <TextBox x:Name="SurnameBox" HorizontalAlignment="Left" Margin="473,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="196" MaxHeight="20"/>
         <Button Content="Зарегистрироватся" HorizontalAlignment="Left" Margin="220,313,0,0" VerticalAlignment="Top" Height="95" Width="449" Click="Button_Click_1"/>
         <Button Content="Вернуться" HorizontalAlignment="Left" Margin="29,376,0,0" VerticalAlignment="Top" Height="32" Width="161"  Click="Button_Click"/>
 
