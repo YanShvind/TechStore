@@ -27,6 +27,7 @@ namespace TechStore
         {
             InitializeComponent();
             DbContextTech.entity = new technicalstoreEntities();
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -44,6 +45,9 @@ namespace TechStore
             DbContextTech.entity.SaveChanges();
             File.Copy(paths, System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "..", ".."), $"Images2\\{saymyname}")));
             MessageBox.Show("Успешно добавлено");
+            Catalog add = new Catalog();
+            add.Show();
+            this.Close();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

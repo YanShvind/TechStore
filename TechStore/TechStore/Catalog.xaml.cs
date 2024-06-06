@@ -25,8 +25,12 @@ namespace TechStore
             InitializeComponent();
             DbContextTech.entity = new technicalstoreEntities();
             ListView1.ItemsSource = DbContextTech.entity.goods.ToList();
+
             if (DbContextTech.staff == 1)
+            {
                 AdminButton.Visibility = Visibility.Visible;
+                User.Visibility = Visibility.Visible;
+            }
 
             SortBy.ItemsSource = new string[] { "Название", "цена" };
             var enumDirection = new string[] { "по возрастанию", "по убыванию" };
@@ -85,7 +89,6 @@ namespace TechStore
                     idgood = data.idgood,
                     quantity = 1,
                 };
-                //test12
                 DbContextTech.entity.basket.Add(cartItem);
                 DbContextTech.entity.SaveChanges();
             }
@@ -129,6 +132,38 @@ namespace TechStore
         private void ListView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Button_ClickChange(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            // Получаем данные текущего элемента
+            var data = button.DataContext as goods;
+
+            ChangeCell add = new ChangeCell(data);
+            add.Show();
+            this.Close();
+        }
+
+        private void Grid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Grid grid = sender as Grid;
+            Button button1 = grid.Children[grid.Children.Count - 1] as Button;
+            Button button2 = grid.Children[grid.Children.Count - 2] as Button;
+
+            if (DbContextTech.staff == 1)
+            {
+                button1.Visibility = Visibility.Visible;
+                button2.Visibility = Visibility.Visible;
+
+            }
+        }
+
+        private void Button_ClickUsers(object sender, RoutedEventArgs e)
+        {
+            Users add = new Users();
+            add.Show();
+            this.Close();
         }
     }
 }

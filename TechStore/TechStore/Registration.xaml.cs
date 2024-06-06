@@ -91,6 +91,9 @@ namespace TechStore
             DbContextTech.entity.SaveChanges();
             DbContextTech.authUserId = user.iduser;
             MessageBox.Show("Регистрация успешна!", "Вернитесь и войдите", MessageBoxButton.OK, MessageBoxImage.Information);
+            MainWindow add = new MainWindow();
+            add.Show();
+            this.Close();
         }
 
         private bool IsValidEmail(string email)

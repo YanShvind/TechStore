@@ -13,7 +13,7 @@
         ResizeMode="NoResize">
     <Grid>
 
-        <Grid HorizontalAlignment="Center" Width="800" Height="57" VerticalAlignment="Top" Margin="0,367,0,0">
+        <Grid HorizontalAlignment="Center"  Width="874" Height="57" VerticalAlignment="Top" Margin="0,367,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="3*"/>
@@ -25,9 +25,10 @@
             <Label Content="Сортировка" HorizontalAlignment="Left" Margin="32,2,0,0" VerticalAlignment="Top"/>
             <Label Grid.Column="2" Content="Поиск" HorizontalAlignment="Center" VerticalAlignment="Top" Width="78"/>
             <TextBox Grid.Column="2" x:Name="SearchTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139" Height="22" Margin="0,28,0,0" TextChanged="SearchTextBox_TextChanged"/>
-            <Button Grid.Column="4" Content="Корзина" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.517,-0.042" Height="45" Width="112" Click="Button_Click"/>
+            <Button Grid.Column="4" Content="Корзина" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.517,-0.042" Height="45" Width="112" Click="Button_Click" Margin="10,0,0,0"/>
             <ComboBox x:Name="sortProp" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,28,0,0"/>
             <Label Grid.Column="1" Content="Фильтры" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Button x:Name="User" Grid.Column="4" Content="Users" HorizontalAlignment="Left" VerticalAlignment="Center" Height="45" Width="39" Visibility="Hidden" Click="Button_ClickUsers" Margin="138,0,0,0"/>
             <Button x:Name="AdminButton" Grid.Column="3" Content="Добавить товар" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="144" Visibility="Hidden" Click="Button_ClickAdd"/>
         </Grid>
         <Grid Height="323" VerticalAlignment="Center">
@@ -35,11 +36,11 @@
                 <ColumnDefinition Width="19*"/>
                 <ColumnDefinition Width="81*"/>
             </Grid.ColumnDefinitions>
-            <ListView x:Name="ListView1" Grid.ColumnSpan="2" Margin="0,-53,0,10" SelectionChanged="ListView1_SelectionChanged">
+            <ListView x:Name="ListView1" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="0,-53,0,10" SelectionChanged="ListView1_SelectionChanged">
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid MouseEnter="Grid_MouseEnter">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="140"/>
                                 <ColumnDefinition Width="400"/>
@@ -66,9 +67,11 @@
                             <TextBlock Grid.Column="2" Margin="60,0,100,0">
                                 <Run></Run>
                             </TextBlock>
-                            <Button Grid.Column="2" Content="Удалить" Margin="167,90,10,10" Click="Button_ClickDel"/>
-
                             <Button Grid.Column="2" Margin="35,90,0,9" HorizontalAlignment="Left" Click="Button_Click_1" Width="115">Добавить в корзину</Button>
+
+                            <Button x:Name="DeleteButton" Grid.Column="2" Content="Удалить" Margin="167,90,10,10" Click="Button_ClickDel" Visibility="Hidden"/>
+
+                            <Button x:Name="ChangeButton" Grid.Column="2" Margin="107,64,0,55" HorizontalAlignment="Left" Click="Button_ClickChange" Width="114" Visibility="Hidden">Редактировать</Button>
 
                         </Grid>
                     </DataTemplate>

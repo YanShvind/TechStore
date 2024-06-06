@@ -1,0 +1,40 @@
+﻿<Window x:Class="TechStore.Users"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TechStore"
+        mc:Ignorable="d"
+        Title="Users" Height="450" Width="800">
+    <Grid>
+        <DataGrid Margin="10,46,10,10" AutoGenerateColumns="False" x:Name="gridData"
+        GridLinesVisibility="All" AlternatingRowBackground="#EFEFEF" 
+        BorderBrush="#CCCCCC" BorderThickness="1" ColumnHeaderHeight="40">
+
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="Background" Value="#EAEAEA"/>
+                    <Setter Property="BorderBrush" Value="#CCCCCC"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="Padding" Value="5,0,5,0"/>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="staff" Width="Auto" Binding="{Binding staff}"/>
+                <DataGridTextColumn Header="login" Width="Auto" Binding="{Binding login}"/>
+                <DataGridTextColumn Header="password" Width="Auto" Binding="{Binding password}"/>
+                <DataGridTextColumn Header="phoneNumber" Width="Auto" Binding="{Binding phonenumber}"/>
+                <DataGridTextColumn Header="email" Width="Auto" Binding="{Binding email}"/>
+                <DataGridTextColumn Header="name" Width="Auto" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="surname" Width="3*" Binding="{Binding surname}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Назад" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="31" Width="104" Click="Button_Click"/>
+        <Button Content="Сохранить" HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Height="31" Width="104" Click="Button_Click_1"/>
+    </Grid>
+</Window>

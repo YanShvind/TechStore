@@ -166,6 +166,9 @@
     <Compile Include="category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChangeCell.xaml.cs">
+      <DependentUpon>ChangeCell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="DbContextTech.cs" />
     <Compile Include="goods.cs">
@@ -201,6 +204,9 @@
     <Compile Include="users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Users.xaml.cs">
+      <DependentUpon>Users.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -210,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Catalog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangeCell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -230,6 +240,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Registration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Users.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -276,6 +290,7 @@
     <Resource Include="Images1\dexp.JPG" />
     <Resource Include="Images1\HUAWEI.JPG" />
     <Resource Include="Images1\logo1.png" />
+    <Resource Include="Images1\ff.JPG" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
